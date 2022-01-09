@@ -31,7 +31,6 @@ for i in range(1,6):
         env.process(patient_is_here(env,nurse,doctor,7))
         env.run(until=480)
         print("i : "+str(i)+"//     m :"+str(m)+"//    PSim : "+str(count))
-        
         count = -1
 
 
