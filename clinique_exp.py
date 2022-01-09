@@ -23,8 +23,6 @@ def patient_treated(env,i , nurse,doctor):
         # print('Patient %d finish with doctor at %d'%(i, env.now))
     count +=1
     # print("*****Patient %d is fully treated"%(i))
-    
-
 for i in range(1,6):
     for m in range(1,5):
         env = simpy.Environment()
@@ -32,7 +30,8 @@ for i in range(1,6):
         doctor = simpy.Resource(env, capacity=m)
         env.process(patient_is_here(env,nurse,doctor,7))
         env.run(until=480)
-        print("i : "+str(i)+" m :"+str(m)+" PSim : "+str(count))
+        print("i : "+str(i)+"//     m :"+str(m)+"//    PSim : "+str(count))
+        
         count = -1
 
 
