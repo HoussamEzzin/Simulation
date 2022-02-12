@@ -8,6 +8,14 @@ NCE = 0 #nombre clients entres
 C1 = 0 #etat caisse 1 libre
 C2 = 0 # etat caisse 2 libre
 calendrier = []
+file = []
+
+def inserer_file(ref):
+    global file
+    file.append(ref)
+def supprimer_file(ref):
+    global file
+    file.remove(ref)
 
 def planifier_evt(ref,type,date):
     evt = {
@@ -70,7 +78,7 @@ def arrivee(ref):
         planifier_evt(i,"A",DA)
 
 def fin_magasinage(ref):
-    global C1, C2
+    global C1, C2, LQ
     if C1 == 0 or C2 == 0:
         if(C1 == 0):
             C1 = ref
@@ -81,7 +89,25 @@ def fin_magasinage(ref):
         LQ = LQ + 1
         inserer_file(ref)
         
+def fin_paiement(ref):
+    global C1,C2,file,LQ
+    if LQ == 0:
+        if C1 == ref:
+            C1 = 0
+        else: 
+            C2 = 0
+    else:
+        J = file[0]
+        supprimer_file(J)
+        LQ = LQ -1 
+        if C1 == ref:
+            C1 = J
+        else:
+            C2 = J
+        planifier_evt(J,"FP",H +F3(random.random()))
+    
         
+                
 
 planifier_evt(1,"A",F1(random.random()))
 while(len(calendrier)!=0):
